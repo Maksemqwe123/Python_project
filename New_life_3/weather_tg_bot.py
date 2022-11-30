@@ -12,6 +12,7 @@ import requests
 import aiofiles
 import datetime
 import os
+from ... import cities
 
 
 bot = Bot('5943153454:AAG5fynEBoLObp7za7MpfLpVbI8j-ObMORs')
@@ -68,7 +69,7 @@ async def today(message: types.Message):
         await message.reply("Проверьте название города")
 
 
-@dp.message_handler(Text(equals='Минск', ignore_case=True))
+@dp.message_handler(Text(equals=cities, ignore_case=True))
 async def today(message: types.Message):
     try:
         r = requests.get(
