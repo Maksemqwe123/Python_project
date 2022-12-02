@@ -1,22 +1,26 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = f'https://litnet.com/ru/top/fentezi'
+list_urls = []
+litres_description = []
 
-response = requests.get(url=url)
 
-pages_info = BeautifulSoup(response.text, 'html.parser')
+def litres():
+    url = f'https://litnet.com/ru/top/fentezi'
 
-books = pages_info.find_all('div', class_='row book-item')
-# print(books)
+    response = requests.get(url=url)
 
-datas = []
-litres_data = []
+    pages_info = BeautifulSoup(response.text, 'html.parser')
 
-for book in books:
-    urls = "https://litnet.com"+book.find('h4', class_='book-title').find('a').get('href')
-    description = book.find('h4', class_='book-title').find('a').text
+    books = pages_info.find_all('div', class_='row book-item')
 
-    datas.append([urls])
-    litres_data.append([description])
-    # print(urls)
+    for book in books:
+        urls = "https://litnet.com"+book.find('h4', class_='book-title').find('a').get('href')
+        description = book.find('h4', class_='book-title').find('a').text
+
+        list_urls.append(urls)
+        litres_description.append(description)
+    return list_urls, litres_description
+
+
+book_litres = litres()
