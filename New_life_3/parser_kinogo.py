@@ -1,20 +1,26 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = f'https://kinogo.film/films-2021/'
+kinogo_urls = []
+kinogo_decription = []
 
-response = requests.get(url=url)
 
-pages_info = BeautifulSoup(response.text, 'html.parser')
+def film_kinogo():
+    url = f'https://kinogo.film/films-2021/'
 
-films = pages_info.find_all('div', class_='shortstory')
+    response = requests.get(url=url)
 
-data = []
-kinogo_data = []
+    pages_info = BeautifulSoup(response.text, 'html.parser')
 
-for film in films:
-    urls = film.find('h2', class_='zagolovki').find('a').get('href')
-    description = film.find('h2', class_='zagolovki').find('a').text
+    films = pages_info.find_all('div', class_='shortstory')
 
-    data.append([urls])
-    kinogo_data.append([description])
+    for film in films:
+        urls = film.find('h2', class_='zagolovki').find('a').get('href')
+        description = film.find('h2', class_='zagolovki').find('a').text
+
+        kinogo_urls.append(urls)
+        kinogo_decription.append(description)
+    return kinogo_urls, kinogo_decription
+
+
+parser_kinogo = film_kinogo()
