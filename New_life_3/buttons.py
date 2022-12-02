@@ -1,20 +1,24 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
+cities = ['Гомель', 'Минск', 'Брест', 'Витебск', 'Могилёв', 'Гродно']
+
 user_kb = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-    KeyboardButton('Гомель'),
-    KeyboardButton('Минск'),
-    KeyboardButton('Брест')
+    KeyboardButton(cities[0]),
+    KeyboardButton(cities[1]),
+    KeyboardButton(cities[2])
 ).row(
-    KeyboardButton('Витебск'),
-    KeyboardButton('Могилёв'),
-    KeyboardButton('Гродно')
+    KeyboardButton(cities[3]),
+    KeyboardButton(cities[4]),
+    KeyboardButton(cities[5])
 )
 
-user_kb_1 = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
-    KeyboardButton('что можно поделать дома ?')
+house_or_street = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).row(
+    KeyboardButton('Что можно поделать дома ?')
+).row(
+    KeyboardButton('Как можно провести время на улице ?')
 )
 
-user_kb_2 = ReplyKeyboardMarkup(resize_keyboard=True).row(
+help_assistant_house = ReplyKeyboardMarkup(resize_keyboard=True).row(
     KeyboardButton('Что за акция на пиццу?'),
     KeyboardButton('Какой фильм можно посмотреть?')
 ).row(
@@ -22,4 +26,13 @@ user_kb_2 = ReplyKeyboardMarkup(resize_keyboard=True).row(
 ).row(
     KeyboardButton('Какой десерт можно легко приготовить?')
 )
-# one_time_keyboard=True
+
+help_assistant_street = ReplyKeyboardMarkup(resize_keyboard=True).row(
+    KeyboardButton('На какой фильм в кинотеатр можно сходить ?')
+).row(
+    KeyboardButton('Куда можно сходить поесть ?')
+).row(
+    KeyboardButton('Где и какой кофе можно выпить?')
+).row(
+    KeyboardButton('Какое представление можно посмотреть?')
+)
