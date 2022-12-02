@@ -1,20 +1,26 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = f'https://www.russianfood.com/recipes/bytype/?fid=45'
+cook_urls = []
+cook_description = []
 
-response = requests.get(url=url)
 
-pages_info = BeautifulSoup(response.text, 'html.parser')
+def cook_dessert():
+    url = f'https://www.russianfood.com/recipes/bytype/?fid=45'
 
-cooks = pages_info.find_all('div', class_='recipe_l in_seen v2')
+    response = requests.get(url=url)
 
-data_1 = []
-cook_data_1 = []
+    pages_info = BeautifulSoup(response.text, 'html.parser')
 
-for cook in cooks:
-    urls = "https://www.russianfood.com"+cook.find('div', class_='title').find('a').get('href')
-    description = cook.find('div', class_='title').find('a').text
+    cooks = pages_info.find_all('div', class_='recipe_l in_seen v2')
 
-    data_1.append([urls])
-    cook_data_1.append([description])
+    for cook in cooks:
+        urls = "https://www.russianfood.com"+cook.find('div', class_='title').find('a').get('href')
+        description = cook.find('div', class_='title').find('a').text
+
+        cook_urls.append(urls)
+        cook_description.append(description)
+    return cook_urls, cook_description
+
+
+parser_cook = cook_dessert()
